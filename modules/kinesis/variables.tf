@@ -1,4 +1,4 @@
-variable "dynamo_tables" {
+variable "kinesis_streams" {
   description = "a map of amazon kinesis streams data to be created"
   type = map(object({
     shard_count = number

@@ -26,6 +26,13 @@ module "users" {
 }
 
 module "kinesis" {
-  source = "./modules/kinesis"
+  source          = "./modules/kinesis"
   kinesis_streams = var.kinesis_streams
+}
+
+module "dynamo" {
+  source          = "./modules/dynamo"
+  kinesis_streams = module.kinesis.kinesis_streams
+  dynamo_tables   = var.dynamo_tables
+  depends_on      = [module.kinesis]
 }

@@ -1,3 +1,3 @@
-output "kinesis_streams" {
-  value = local.kinesis_name_arn
+output "dynamo_name_arn" {
+  value = local.dynamo_name_arn
 }

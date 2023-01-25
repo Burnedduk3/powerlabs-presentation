@@ -41,15 +41,42 @@ policies_folder = "policies"
 
 kinesis_streams = {
   kinesis_test = {
-    shard_count = 1
-    retention_period = 54
+    shard_count               = 1
+    retention_period          = 54
     enforce_consumer_deletion = false
-    encryption_type = "NONE"
+    encryption_type           = "NONE"
   }
   kinesis_test_2 = {
-    shard_count = 2
-    retention_period = 100
+    shard_count               = 2
+    retention_period          = 100
     enforce_consumer_deletion = true
-    encryption_type = "NONE"
+    encryption_type           = "NONE"
+  }
+}
+
+dynamo_tables = {
+  dynamo_test = {
+    billing_mode   = "PROVISIONED"
+    read_capacity  = 20
+    write_capacity = 20
+    hash_key       = "userID"
+    range_key      = "TableName"
+    attributes = {
+      userID : "N"
+      TableName : "N"
+    }
+    kinesis_stream_name = "kinesis_test"
+  }
+  dynamo_test_2 = {
+    billing_mode   = "PROVISIONED"
+    read_capacity  = 23
+    write_capacity = 14
+    hash_key       = "userID"
+    range_key      = "TableName"
+    attributes = {
+      userID : "N"
+      TableName : "N"
+    }
+    kinesis_stream_name = "kinesis_test_2"
   }
 }

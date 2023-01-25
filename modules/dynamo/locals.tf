@@ -1,13 +1,21 @@
 locals {
+  //prepare input for module
+  attach_kinesis_dynamo = {
+    for key, value in var.dynamo_tables : "${key}_${value.kinesis_stream_name}" => {
+      dynamo_name: key
+      kinesis_arn: var.kinesis_streams[value.kinesis_stream_name]
+    }
+  }
+
   // prepare the outputs from the modules
-  kinesis_resources = flatten([
-    for kinesis_stream in aws_kinesis_stream.this : {
-      name = kinesis_stream.name
-      arn = kinesis_stream.arn
+  dynamo_resources = flatten([
+    for dynamo_table in aws_dynamodb_table.this : {
+      name = dynamo_table.name
+      arn = dynamo_table.arn
     }
   ])
 
-  kinesis_name_arn = {
-    for kinesis in local.kinesis_resources : "${kinesis.name}" => kinesis.arn
+  dynamo_name_arn = {
+    for dynamo in local.dynamo_resources : "${dynamo.name}" => dynamo.arn
   }
 }
