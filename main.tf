@@ -24,3 +24,8 @@ module "users" {
   groups     = module.groups.groups
   depends_on = [module.policies, module.groups]
 }
+
+module "kinesis" {
+  source = "./modules/kinesis"
+  kinesis_streams = var.kinesis_streams
+}

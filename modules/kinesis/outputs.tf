@@ -1,7 +1,3 @@
-output "policies" {
-  value = module.policies.policies
-}
-
-output "roles" {
-  value = module.roles.roles
+output "kinesis_streams" {
+  value = local.kinesis_name_arn
 }

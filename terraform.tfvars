@@ -38,3 +38,18 @@ users = {
 
 
 policies_folder = "policies"
+
+kinesis_streams = {
+  kinesis_test = {
+    shard_count = 1
+    retention_period = 54
+    enforce_consumer_deletion = false
+    encryption_type = "NONE"
+  }
+  kinesis_test_2 = {
+    shard_count = 2
+    retention_period = 100
+    enforce_consumer_deletion = true
+    encryption_type = "NONE"
+  }
+}
