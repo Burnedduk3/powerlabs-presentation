@@ -3,7 +3,7 @@ locals {
   policy_resources = flatten([
     for policy in aws_iam_policy.this : {
       name = policy.name
-      arn = policy.arn
+      arn  = policy.arn
     }
   ])
 

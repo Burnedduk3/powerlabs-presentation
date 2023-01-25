@@ -1,8 +1,8 @@
 locals {
   // Prepare the inputs for the resources
   aws_managed_policy_names = distinct(flatten([
-    for _, value  in var.users:[
-      for policy_name in value.aws_managed_policy_names: [
+    for _, value in var.users : [
+      for policy_name in value.aws_managed_policy_names : [
         policy_name
       ]
     ]
@@ -12,9 +12,9 @@ locals {
 
   aws_prepared_managed_policies = distinct(flatten([
     for key, value in var.users : [
-      for policy_name in value.aws_managed_policy_names: {
-        user = key
-        policy_arn = local.aws_managed_policies[policy_name].arn
+      for policy_name in value.aws_managed_policy_names : {
+        user        = key
+        policy_arn  = local.aws_managed_policies[policy_name].arn
         policy_name = policy_name
       }
     ]
@@ -22,9 +22,9 @@ locals {
 
   user_managed_prepared_policies = flatten([
     for key, value in var.users : [
-      for policy_name in value.user_managed_policy_names  : {
-        user = key
-        policy_arn = var.policies[policy_name]
+      for policy_name in value.user_managed_policy_names : {
+        user        = key
+        policy_arn  = var.policies[policy_name]
         policy_name = policy_name
       }
     ]
@@ -42,9 +42,9 @@ locals {
 
   user_prepared_groups = flatten([
     for key, value in var.users : [
-      for group_name in value.groups  : {
-        user = key
-        group_arn = var.groups[group_name]
+      for group_name in value.groups : {
+        user       = key
+        group_arn  = var.groups[group_name]
         group_name = group_name
       }
     ]

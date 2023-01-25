@@ -3,7 +3,7 @@ locals {
   kinesis_resources = flatten([
     for kinesis_stream in aws_kinesis_stream.this : {
       name = kinesis_stream.name
-      arn = kinesis_stream.arn
+      arn  = kinesis_stream.arn
     }
   ])
 

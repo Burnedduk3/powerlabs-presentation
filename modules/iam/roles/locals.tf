@@ -1,8 +1,8 @@
 locals {
   // Prepare the inputs for the resources
   aws_managed_policy_names = distinct(flatten([
-    for _, value  in var.roles:[
-      for policy_name in value.aws_managed_policies_names: [
+    for _, value in var.roles : [
+      for policy_name in value.aws_managed_policies_names : [
         policy_name
       ]
     ]
@@ -12,9 +12,9 @@ locals {
 
   aws_prepared_managed_policies = distinct(flatten([
     for key, value in var.roles : [
-      for policy_name in value.aws_managed_policies_names: {
-        role = key
-        policy_arn = local.aws_managed_policies[policy_name].arn
+      for policy_name in value.aws_managed_policies_names : {
+        role        = key
+        policy_arn  = local.aws_managed_policies[policy_name].arn
         policy_name = policy_name
       }
     ]
@@ -22,9 +22,9 @@ locals {
 
   user_managed_prepared_policies = flatten([
     for key, value in var.roles : [
-      for policy_name in value.managed_policies_names: {
-        role = key
-        policy_arn = var.policies[policy_name]
+      for policy_name in value.managed_policies_names : {
+        role        = key
+        policy_arn  = var.policies[policy_name]
         policy_name = policy_name
       }
     ]
@@ -44,7 +44,7 @@ locals {
   role_resources = flatten([
     for role in aws_iam_role.this : {
       name = role.name
-      arn = role.arn
+      arn  = role.arn
     }
   ])
 

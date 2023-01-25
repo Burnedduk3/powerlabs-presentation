@@ -7,5 +7,6 @@ variable "vpcs" {
       name              = string
       availability_zone = string
     }))
+    vpc_endpoints = list(string)
   }))
 }

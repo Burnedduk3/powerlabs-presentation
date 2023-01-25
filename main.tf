@@ -36,3 +36,8 @@ module "dynamo" {
   dynamo_tables   = var.dynamo_tables
   depends_on      = [module.kinesis]
 }
+
+module "networking" {
+  source = "./modules/networking"
+  vpcs   = var.vpcs
+}

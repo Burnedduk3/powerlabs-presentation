@@ -80,3 +80,27 @@ dynamo_tables = {
     kinesis_stream_name = "kinesis_test_2"
   }
 }
+
+vpcs = {
+  test = {
+    cidr_block = "10.0.0.0/16"
+    subnets = [
+      {
+        cidr_block        = "10.0.0.0/24"
+        name              = "main-1a"
+        availability_zone = "us-east-1a"
+      },
+      {
+        cidr_block        = "10.0.1.0/24"
+        name              = "main-1b"
+        availability_zone = "us-east-1b"
+      },
+      {
+        cidr_block        = "10.0.2.0/24"
+        name              = "main-1c"
+        availability_zone = "us-east-1c"
+      }
+    ]
+    vpc_endpoints = ["com.amazonaws.us-west-2.s3"]
+  }
+}

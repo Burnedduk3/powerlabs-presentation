@@ -2,8 +2,8 @@ locals {
   //prepare input for module
   attach_kinesis_dynamo = {
     for key, value in var.dynamo_tables : "${key}_${value.kinesis_stream_name}" => {
-      dynamo_name: key
-      kinesis_arn: var.kinesis_streams[value.kinesis_stream_name]
+      dynamo_name : key
+      kinesis_arn : var.kinesis_streams[value.kinesis_stream_name]
     }
   }
 
@@ -11,7 +11,7 @@ locals {
   dynamo_resources = flatten([
     for dynamo_table in aws_dynamodb_table.this : {
       name = dynamo_table.name
-      arn = dynamo_table.arn
+      arn  = dynamo_table.arn
     }
   ])
 

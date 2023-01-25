@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "this" {
-  for_each = var.dynamo_tables
+  for_each       = var.dynamo_tables
   name           = each.key
   billing_mode   = each.value.billing_mode
   read_capacity  = each.value.read_capacity
@@ -17,7 +17,7 @@ resource "aws_dynamodb_table" "this" {
 }
 
 resource "aws_dynamodb_kinesis_streaming_destination" "this" {
-  for_each = local.attach_kinesis_dynamo
+  for_each   = local.attach_kinesis_dynamo
   stream_arn = each.value.kinesis_arn
   table_name = each.value.dynamo_name
 }
