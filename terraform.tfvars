@@ -5,6 +5,9 @@ policies = {
   test-2 = {
     description = "this is a real description"
   }
+  test-3 = {
+    description = "this is a real description"
+  }
 }
 
 roles = {
