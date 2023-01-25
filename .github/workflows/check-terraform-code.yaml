@@ -1,0 +1,41 @@
+name: check-terraform-code
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [ opened, reopened ]
+jobs:
+  check-terraform-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the commit
+        uses: actions/checkout@v3
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.3.7
+
+      - name: configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1-node16
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: "us-east-1"
+
+      - name: terraform init
+        id: init
+        run: terraform init
+
+      - name: terraform fmt
+        id: fmt
+        run: terraform fmt -check
+
+      - name: terraform validate
+        id: validate
+        run: terraform validate
+
+      - name: terraform plan
+        id: plan
+        run: terraform plan

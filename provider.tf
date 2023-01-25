@@ -1,7 +1,7 @@
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "4.51.0"
     }
   }
@@ -10,5 +10,12 @@ terraform {
 }
 
 provider "aws" {
-  # Configuration options
+  region = "us-east-1"
+  default_tags {
+    tags = {
+      Environment = "Test"
+      Owner       = "Juan"
+      Project     = "Test"
+    }
+  }
 }
